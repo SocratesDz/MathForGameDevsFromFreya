@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.145098, 0.145098, 0.145098, 1 )
+
+[node name="Gun" type="Spatial"]
+
+[node name="CSGCylinder" type="CSGCylinder" parent="."]
+transform = Transform( 1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0 )
+radius = 0.105888
+height = 0.806617
+material = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.226503, -0.30328 )
+width = 0.096696
+height = 0.335024
+depth = 0.133578
+material = SubResource( 2 )

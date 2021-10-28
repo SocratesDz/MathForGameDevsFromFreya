@@ -1,0 +1,194 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://assignments/Assignment5/MeasureDisplay.gd" type="Script" id=1]
+[ext_resource path="res://assignments/Assignment5/Assignment5.gd" type="Script" id=2]
+
+[sub_resource type="PrismMesh" id=1]
+
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="SphereMesh" id=3]
+radius = 0.5
+height = 1.0
+
+[sub_resource type="SphereShape" id=4]
+radius = 0.5
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.141176, 0.117647, 0.4, 1 )
+
+[sub_resource type="PlaneMesh" id=9]
+material = SubResource( 8 )
+size = Vector2( 10, 10 )
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 5, 0.01, 5 )
+
+[sub_resource type="QuadMesh" id=11]
+
+[sub_resource type="BoxShape" id=12]
+extents = Vector3( 0.5, 0.5, 0.01 )
+
+[sub_resource type="CapsuleMesh" id=13]
+radius = 0.5
+
+[sub_resource type="CapsuleShape" id=14]
+radius = 0.5
+
+[sub_resource type="CylinderMesh" id=15]
+top_radius = 0.5
+bottom_radius = 0.5
+
+[sub_resource type="CylinderShape" id=16]
+radius = 0.5
+height = 1.0
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Prism" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53796, 0, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Prism"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Prism"]
+shape = SubResource( 2 )
+
+[node name="Sphere" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91534, 0.167581, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Sphere"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Sphere"]
+shape = SubResource( 4 )
+
+[node name="Cube" type="StaticBody" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Cube"]
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Cube"]
+shape = SubResource( 7 )
+
+[node name="MeasureDisplay" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="MeasureDisplay"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 256.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSplitContainer" type="VBoxContainer" parent="MeasureDisplay/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ObjectName" type="Label" parent="MeasureDisplay/Panel/VSplitContainer"]
+margin_right = 236.0
+margin_bottom = 20.0
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="SurfaceArea" type="Label" parent="MeasureDisplay/Panel/VSplitContainer"]
+margin_top = 24.0
+margin_right = 236.0
+margin_bottom = 44.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.980502, 0.196511, 0, -0.196511, 0.980502, 0, 3.02215, 10.6051 )
+current = true
+
+[node name="Plane" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.63209, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Plane"]
+mesh = SubResource( 9 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Plane"]
+shape = SubResource( 10 )
+
+[node name="Quad" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.11842, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Quad"]
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Quad"]
+shape = SubResource( 12 )
+
+[node name="Capsule" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30012, 2.11842, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Capsule"]
+mesh = SubResource( 13 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Capsule"]
+shape = SubResource( 14 )
+
+[node name="Cylinder" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45843, 2.11842, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Cylinder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.566565, 0 )
+mesh = SubResource( 15 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Cylinder"]
+shape = SubResource( 16 )
