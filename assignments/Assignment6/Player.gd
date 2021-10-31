@@ -18,23 +18,18 @@ func _physics_process(delta):
 		get_tree().quit()
 	
 	gunRayCast.force_raycast_update()
-	var origin = laser.transform.origin
-#	if gunRayCast.get_collider():
-#		point = transform.basis.xform_inv(gunRayCast.get_collision_point())
-#	var normal = gunRayCast.get_collision_normal()
-	
-	var space = get_world().direct_space_state
-	var result = space.intersect_ray(origin, gunRayCast.cast_to)
+	var origin = gunRayCast.transform.xform(laser.transform.origin)
 	var point = gunRayCast.cast_to
-	if result:
-		point = result.position
+	var collider = gunRayCast.get_collider()
+	if collider:
+		point = laser.transform.xform_inv(gunRayCast.get_collision_point())
 	
 	laser.clear()
-	laser.begin(Mesh.PRIMITIVE_LINE_STRIP)
-	_draw_collision_positon(origin, point)
-	if result:
-		var normal = result.normal
-		_draw_collision_normal(point, normal)
+	laser.begin(Mesh.PRIMITIVE_LINES)
+	_draw_collision_position_line(origin, point)
+	if collider:
+		var normal = gunRayCast.get_collision_normal()
+		_draw_collision_normal_line(point, normal)
 	laser.end()
 	
 	movement = move_and_slide(_get_movement_input() * WALK_SPEED, Vector3.UP)
@@ -54,10 +49,35 @@ func _get_movement_input():
 	var x = Input.get_action_strength("strafe_left") - Input.get_action_strength("strafe_right")
 	return transform.basis.xform(Vector3(x, 0, z))
 
-func _draw_collision_positon(var origin: Vector3, var position: Vector3):
+func _draw_collision_position_line(var origin: Vector3, var position: Vector3):
+	laser.set_color(Color.white)
 	laser.add_vertex(origin)
 	laser.add_vertex(position)
 
-func _draw_collision_normal(var origin: Vector3, var normal: Vector3):
+func _draw_collision_normal_line(var origin: Vector3, var normal: Vector3):
+	laser.set_color(Color.blue)
 	laser.add_vertex(origin)
-	laser.add_vertex(normal)
+	laser.add_vertex(origin*normal)
+
+func _draw_mesh_cube() -> MeshInstance:
+	var corners = PoolVector3Array()
+	# bottom 4 positions:
+	corners.push_back(Vector3(1, 0, 1))
+	corners.push_back(Vector3(-1, 0, 1))
+	corners.push_back(Vector3(-1, 0, -1))
+	corners.push_back(Vector3(1, 0, -1))
+	# top 4 positions:
+	corners.push_back(Vector3(1, 2, 1))
+	corners.push_back(Vector3(-1, 2, 1))
+	corners.push_back(Vector3(-1, 2, -1))
+	corners.push_back(Vector3(1, 2, -1))
+	
+	var array_mesh = ArrayMesh.new()
+	var arrays = []
+	arrays.resize(ArrayMesh.ARRAY_MAX)
+	arrays[ArrayMesh.ARRAY_VERTEX] = corners
+	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINE_LOOP, arrays)
+	
+	var mesh = MeshInstance.new()
+	mesh.mesh = array_mesh
+	return mesh
