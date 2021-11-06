@@ -1,0 +1,127 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assignments/Assignment7/Assignment7.gd" type="Script" id=1]
+[ext_resource path="res://assignments/Assignment7/ShapeGenerator.gd" type="Script" id=2]
+
+[node name="Assignment7" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ShapeGenerator" type="Node2D" parent="."]
+position = Vector2( 512, 320 )
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 208.0
+margin_bottom = 152.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 0.632
+margin_bottom = -0.064003
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
+anchor_left = 0.038
+anchor_top = 0.053
+anchor_right = 0.962
+anchor_bottom = 0.947
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer"]
+margin_right = 192.0
+margin_bottom = 14.0
+text = "Polygon drawer"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+margin_top = 18.0
+margin_right = 192.0
+margin_bottom = 34.0
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+margin_top = 1.0
+margin_right = 46.0
+margin_bottom = 15.0
+text = "Radius:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RadiusSlider" type="HSlider" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 50.0
+margin_right = 172.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+min_value = 5.0
+value = 50.0
+
+[node name="RadiusIndicator" type="Label" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 176.0
+margin_top = 1.0
+margin_right = 192.0
+margin_bottom = 15.0
+text = "50"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+margin_top = 38.0
+margin_right = 192.0
+margin_bottom = 54.0
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
+margin_top = 1.0
+margin_right = 44.0
+margin_bottom = 15.0
+text = "Points:"
+
+[node name="PointsSlider" type="HSlider" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
+margin_left = 48.0
+margin_right = 180.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+min_value = 3.0
+max_value = 32.0
+value = 3.0
+
+[node name="PointsIndicator" type="Label" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
+margin_left = 184.0
+margin_top = 1.0
+margin_right = 192.0
+margin_bottom = 15.0
+text = "3"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+margin_top = 58.0
+margin_right = 192.0
+margin_bottom = 74.0
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/HBoxContainer3"]
+margin_top = 1.0
+margin_right = 43.0
+margin_bottom = 15.0
+text = "Depth:"
+
+[node name="DepthSlider" type="HSlider" parent="Control/Panel/VBoxContainer/HBoxContainer3"]
+margin_left = 47.0
+margin_right = 180.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 1.0
+value = 1.0
+
+[node name="DepthIndicator" type="Label" parent="Control/Panel/VBoxContainer/HBoxContainer3"]
+margin_left = 184.0
+margin_top = 1.0
+margin_right = 192.0
+margin_bottom = 15.0
+text = "1"
+
+[connection signal="value_changed" from="Control/Panel/VBoxContainer/HBoxContainer/RadiusSlider" to="." method="_on_RadiusSlider_value_changed"]
+[connection signal="value_changed" from="Control/Panel/VBoxContainer/HBoxContainer2/PointsSlider" to="." method="_on_PointsSlider_value_changed"]
+[connection signal="value_changed" from="Control/Panel/VBoxContainer/HBoxContainer3/DepthSlider" to="." method="_on_DepthSlider_value_changed"]
